@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property string $address
+ * @property int $account_count
+ * @property string $ip
+ * @property Component $component
+ * @property Collection<Protocol> $protocols
+ */
 class Characteristic extends Model
 {
     use HasFactory;
