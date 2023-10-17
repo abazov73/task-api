@@ -6,12 +6,12 @@ use App\Models\Component;
 
 class ComponentService
 {
-    public function create($data): Component
+    public static function createWithoutSaving($data): Component
     {
         return Component::create($data);
     }
 
-    public function destroy(Component $component)
+    public static function destroy(Component $component)
     {
         $component->delete();
     }

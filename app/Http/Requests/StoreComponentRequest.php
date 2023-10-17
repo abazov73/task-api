@@ -23,9 +23,9 @@ class StoreComponentRequest extends FormRequest
             'characteristics.*.address' => 'string|required',
             'characteristics.*.account_count' => 'numeric|required|min:1',
             'characteristics.*.ip' => 'string|required',
-            'protocols' => 'array|required|min:1',
-            'protocols.*.type' => [new Enum(ProtocolTypes::class), 'required'],
-            'protocols.*.port' => 'numeric|required',
+            'characteristics.*.protocols' => 'array|required|min:1',
+            'characteristics.*.protocols.*.type' => [new Enum(ProtocolTypes::class), 'required'],
+            'characteristics.*.protocols.*.port' => 'numeric|required',
         ];
     }
 }

@@ -6,8 +6,9 @@ use App\Models\Protocol;
 
 class ProtocolService
 {
-    public function create($data): Protocol
+    public static function createWithoutSaving($data, int $characteristic_id): Protocol
     {
-        return Protocol::create($data);
+        $data['characteristic_id'] = $characteristic_id;
+        return new Protocol($data);
     }
 }

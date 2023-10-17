@@ -6,8 +6,9 @@ use App\Models\Characteristic;
 
 class CharacteristicService
 {
-    public function create($data): Characteristic
+    public static function createWithoutSaving($data, int $componentId): Characteristic
     {
+        $data['component_id'] = $componentId;
         return Characteristic::create($data);
     }
 }
