@@ -85,6 +85,8 @@ class ComponentController extends Controller
         foreach ($protocols as $protocol) {
             $protocol->save();
         }
+        
+        return response('success');
     }
 
     public function destroy(Component $component)
