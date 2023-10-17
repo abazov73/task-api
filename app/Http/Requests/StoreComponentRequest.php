@@ -33,15 +33,17 @@ class StoreComponentRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Название компонента не может быть пустым',
-            'section_index.required' => 'Индекс раздела компонента не может быть пустым',
-            'characteristics.required' => 'Добавьте хотя бы одну характеристику',
-            'characteristics.*.address.required' => 'Адрес подключения характеристики не может быть пустым',
-            'characteristics.*.account_count.min' => 'Количество учетных записей характерисики должно быть больше 0',
-            'characteristics.*.ip.required' => 'IP характеристики не может быть пустым',
-            'characteristics.*.protocols.required' => 'Добавьте хотя бы один протокол',
-            'characteristics.*.protocols.*.type.enum' => 'Такого протокола не существует',
-            'characteristics.*.protocols.*.port.required' => 'Порт протокола не можект быть пустым',
+            'name.required' => config('strings.nameRequired'),
+            'section_index.required' => config('strings.sectionIndexRequired'),
+            'characteristics.required' => config('strings.characteristicsRequired'),
+            'characteristics.*.address.required' => config('strings.characteristicsAddressRequired'),
+            'characteristics.*.account_count.numeric' => config('strings.characteristicsAccountCountNumeric'),
+            'characteristics.*.account_count.min' => config('strings.characteristicsAccountCountMin'),
+            'characteristics.*.ip.required' => config('strings.characteristicsIpRequired'),
+            'characteristics.*.protocols.required' => config('strings.characteristicsProtocolsRequired'),
+            'characteristics.*.protocols.*.type.Illuminate\Validation\Rules\Enum' => config('strings.characteristicsProtocolsTypeEnum'),
+            'characteristics.*.protocols.*.port.required' => config('strings.characteristicsProtocolsPortRequired'),
+            'characteristics.*.protocols.*.port.numeric' => config('strings.characteristicsProtocolsPortNumeric'),
         ];
     }
 }
