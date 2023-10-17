@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreComponentRequest;
+use App\Http\Resources\ComponentResource;
 use App\Models\Characteristic;
 use App\Models\Component;
 use App\Services\CharacteristicService;
@@ -20,7 +21,7 @@ class ComponentController extends Controller
 
     public function show(Component $component)
     {
-
+        return new ComponentResource($component);
     }
 
     public function store(StoreComponentRequest $request)
