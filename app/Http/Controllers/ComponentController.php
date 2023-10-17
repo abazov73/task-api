@@ -10,9 +10,7 @@ use App\Models\Component;
 use App\Services\CharacteristicService;
 use App\Services\ComponentService;
 use App\Services\ProtocolService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Config;
 
 class ComponentController extends Controller
 {
@@ -22,9 +20,9 @@ class ComponentController extends Controller
         $numOfPages = $request->validated('perPage');
 
         $components = Component::query()->where('name', 'LIKE', "%$queryString%")
-                                        ->orWhere('section_index', $queryString)
-                                        ->orWhere('id', $queryString)
-                                        ->paginate($numOfPages ?? config('constants.componentPerPageDefault'));
+            ->orWhere('section_index', $queryString)
+            ->orWhere('id', $queryString)
+            ->paginate($numOfPages ?? config('constants.componentPerPageDefault'));
 
         return ComponentResource::collection($components);
     }
@@ -37,27 +35,23 @@ class ComponentController extends Controller
     public function store(StoreComponentRequest $request)
     {
         $component = ComponentService::createWithoutSaving(Arr::except($request->validated(), ['characteristics']));
-        
+
         $characteristics = [];
         $protocols = [];
 
-        foreach ($request->validated('characteristics') as $characteristicData)
-        {
+        foreach ($request->validated('characteristics') as $characteristicData) {
             $characteristic = CharacteristicService::createWithoutSaving($characteristicData, $component->id);
-            foreach($characteristicData['protocols'] as $protocolsData)
-            {
+            foreach ($characteristicData['protocols'] as $protocolsData) {
                 $protocols[] = ProtocolService::createWithoutSaving($protocolsData, $characteristic->id);
             }
             $characteristics[] = $characteristic;
         }
 
         $component->save();
-        foreach ($characteristics as $characteristic)
-        {
+        foreach ($characteristics as $characteristic) {
             $characteristic->save();
         }
-        foreach ($protocols as $protocol)
-        {
+        foreach ($protocols as $protocol) {
             $protocol->save();
         }
 
@@ -70,11 +64,9 @@ class ComponentController extends Controller
         $characteristics = [];
         $protocols = [];
 
-        foreach ($request->validated('characteristics') as $characteristicData)
-        {
+        foreach ($request->validated('characteristics') as $characteristicData) {
             $characteristic = CharacteristicService::createWithoutSaving($characteristicData, $component->id);
-            foreach($characteristicData['protocols'] as $protocolsData)
-            {
+            foreach ($characteristicData['protocols'] as $protocolsData) {
                 $protocols[] = ProtocolService::createWithoutSaving($protocolsData, $characteristic->id);
             }
             $characteristics[] = $characteristic;
@@ -87,12 +79,10 @@ class ComponentController extends Controller
 
         $component->update(Arr::except($request->validated(), ['characteristics']));
 
-        foreach ($characteristics as $characteristic)
-        {
+        foreach ($characteristics as $characteristic) {
             $characteristic->save();
         }
-        foreach ($protocols as $protocol)
-        {
+        foreach ($protocols as $protocol) {
             $protocol->save();
         }
     }
@@ -100,6 +90,7 @@ class ComponentController extends Controller
     public function destroy(Component $component)
     {
         ComponentService::destroy($component);
+
         return response('success');
     }
 }

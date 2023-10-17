@@ -9,6 +9,7 @@ class CharacteristicService
     public static function createWithoutSaving($data, int $componentId): Characteristic
     {
         $data['component_id'] = $componentId;
+
         return Characteristic::create($data);
     }
 }

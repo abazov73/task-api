@@ -41,7 +41,7 @@ class StoreComponentRequest extends FormRequest
             'characteristics.*.ip.required' => 'IP характеристики не может быть пустым',
             'characteristics.*.protocols.required' => 'Добавьте хотя бы один протокол',
             'characteristics.*.protocols.*.type.enum' => 'Такого протокола не существует',
-            'characteristics.*.protocols.*.port.required' => 'Порт протокола не можект быть пустым'
+            'characteristics.*.protocols.*.port.required' => 'Порт протокола не можект быть пустым',
         ];
     }
 }

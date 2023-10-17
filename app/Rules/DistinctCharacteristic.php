@@ -15,10 +15,9 @@ class DistinctCharacteristic implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (!collect($value)
-            ->map(fn (array $characteristic) => Arr::only($characteristic, ['address', 'ip']))  
-            ->duplicates()->isEmpty())
-        {
+        if (! collect($value)
+            ->map(fn (array $characteristic) => Arr::only($characteristic, ['address', 'ip']))
+            ->duplicates()->isEmpty()) {
             $fail('Адрес и ip не могут совпадать в двух характеристиках');
         }
     }
