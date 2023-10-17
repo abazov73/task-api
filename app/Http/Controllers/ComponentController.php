@@ -48,6 +48,8 @@ class ComponentController extends Controller
         {
             $protocol->save();
         }
+
+        return response('success');
     }
 
     public function update(Component $component)
